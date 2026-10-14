@@ -1,0 +1,32 @@
+{
+  "editor.fontSize": 12,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.minimap.enabled": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.inlineSuggest.enabled": false,
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "explorer.confirmDelete": true,
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "terminal.integrated.fontSize": 14,
+  "telemetry.telemetryLevel": "off",
+  "extensions.ignoreRecommendations": false,
+  "github.copilot.enable": { "*": false },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "chat.agent.enabled": false,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "javascript.suggest.autoImports": false,
+  "javascript.validate.enable": true,
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
+}

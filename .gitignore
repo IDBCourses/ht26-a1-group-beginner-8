@@ -1,0 +1,11 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Installed packages
+node_modules/
+
+# Secrets: never commit these
+.env
+.env.*
