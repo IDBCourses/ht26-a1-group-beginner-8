@@ -41,7 +41,7 @@ const chord6 = "B";
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const synth = new Tone.PolySynth(Tone.Synth).toDestination(); // can play several notes at once
+const guitar = new Tone.PluckSynth(Tone.PluckSynth).toDestination(); // can play several notes at once
 
 // ---------- Update ----------
 // Update the state. This is called every 100ms.
