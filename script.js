@@ -21,7 +21,8 @@
 // ---------- Settings ----------
 // Settings variables should contain all of the "fixed" parts of your programs
 // For example: which key does what, which notes you can play, the tempo.
-const strum = ["E2", "A2", "D3", "G3", "B3", "E4"]; // the key that plays the example note
+const strum = ["E2", "A2", "D3", "G3", "B3", "E4"];
+const strumKey = ["x", "c", "v", "b", "n", "m"]; // the key that plays the example note
 const key1 = "d"; // the note it plays
 const key2 = "f";
 const key3 = "g";
