@@ -21,16 +21,33 @@
 // ---------- Settings ----------
 // Settings variables should contain all of the "fixed" parts of your programs
 // For example: which key does what, which notes you can play, the tempo.
-const exampleKey = "a"; // the key that plays the example note
-const exampleNote = "C4"; // the note it plays
+
+const stringKey1 = "x";// the key that plays the example note
+const stringKey2 = "c";
+const stringKey3 = "v";
+const stringKey4 = "b";
+const stringKey5 = "n";
+const stringKey6 = "m";
+
+const chordKey1 = "a";
+const chordKey2 = "s";
+const chordKey3 = "d";
+
+const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"];
+const chordG7 = ["G2", "B3", "D3", "G3", "B3", "F4"];
+const chordDM7 = ["A2", "C3", "D3", "A3", "C4", "F4"];
+const chordCmaj7 = ["B2", "C3", "E3", "G3", "B3", "E4"];
+
 
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
 // For example: which octave you're playing in, or whether a drone is on.
+let currentChord = chordOpen;
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const synth = new Tone.PolySynth(Tone.Synth).toDestination(); // can play several notes at once
+const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.2 }).toDestination();
+const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
 
 // ---------- Update ----------
 // Update the state. This is called every 100ms.
@@ -55,9 +72,28 @@ function keyDown(event) {
   if (event.repeat === false) {
     console.log("Key down:", event.key);
 
-    // Example: replace this with your own instrument.
-    if (event.key === exampleKey) {
-      synth.triggerAttack(exampleNote, Tone.now()); // keeps sounding until triggerRelease
+    // Handle stringKeys to play notes in current chord
+    if (event.key === stringKey1) {
+      plucky.triggerAttack(currentChord[0], Tone.now());
+    } else if (event.key === stringKey2) {
+      plucky.triggerAttack(currentChord[1], Tone.now());
+    } else if (event.key === stringKey3) {
+      plucky.triggerAttack(currentChord[2], Tone.now());
+    } else if (event.key === stringKey4) {
+      plucky.triggerAttack(currentChord[3], Tone.now());
+    } else if (event.key === stringKey5) {
+      plucky.triggerAttack(currentChord[4], Tone.now());
+    } else if (event.key === stringKey6) {
+      plucky.triggerAttack(currentChord[5], Tone.now());
+    }
+
+    // Handle chord keys to set current chord
+    if (event.key === chordKey1) {
+      currentChord = chordDM7;
+    } else if (event.key === chordKey2) {
+      currentChord = chordG7;
+    } if (event.key === chordKey3) {
+      currentChord = chordCmaj7
     }
   }
 }
@@ -66,9 +102,18 @@ function keyDown(event) {
 function keyUp(event) {
   console.log("Key up:", event.key);
 
-  // Example: replace this with your own instrument.
-  if (event.key === exampleKey) {
-    synth.triggerRelease(exampleNote, Tone.now());
+  // return to chordOpen on release
+  if (event.key === chordKey1) {
+    if (currentChord === chordDM7){
+      currentChord = chordOpen;
+    }
+  } else if (event.key === chordKey2) {
+    if (currentChord === chordG7){
+      currentChord = chordOpen;
+    }
+  } else if (event.key === chordKey3) {
+    if (currentChord === chordCmaj7)
+      currentChord = chordOpen;
   }
 }
 
