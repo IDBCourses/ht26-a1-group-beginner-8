@@ -22,7 +22,18 @@
 // Settings variables should contain all of the "fixed" parts of your programs
 // For example: which key does what, which notes you can play, the tempo.
 const strum = ["E2", "A2", "D3", "G3", "B3", "E4"]; // the key that plays the example note
-const note1 = "E2"; // the note it plays
+const key1 = "d"; // the note it plays
+const key2 = "f";
+const key3 = "g";
+const key4 = "h";
+const key5 = "j";
+const key6 = "k";
+const chord1 = "C";
+const chord2 = "A";
+const chord3 = "G";
+const chord4 = "E";
+const chord5 = "D";
+const chord6 = "B";
 
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
