@@ -47,7 +47,7 @@ let currentChord = chordOpen;
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.2 }).toDestination();
+const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.5 }).toDestination();
 const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
 
 // ---------- Update ----------
