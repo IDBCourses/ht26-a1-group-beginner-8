@@ -35,11 +35,13 @@ const chordKey = {
   chordKey3: "d"
 }
 
-const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"];
-const chordG7 = ["G2", "B3", "D3", "G3", "B3", "F4"];
-const chordDM7 = ["A2", "C3", "D3", "A3", "C4", "F4"];
-const chordCmaj7 = ["B2", "C3", "E3", "G3", "B3", "E4"];
+const jazz = {
+  chordG7: ["G2", "B3", "D3", "G3", "B3", "F4"],
+  chordDM7: ["A2", "C3", "D3", "A3", "C4", "F4"],
+  chordCmaj7: ["B2", "C3", "E3", "G3", "B3", "E4"],
+}
 
+const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"];
 // ---------- State ----------
 let currentChord = chordOpen;
 
@@ -88,11 +90,11 @@ function keyDown(event) {
 
     // Handle chord keys to set current chord
     if (event.key === chordKey.chordKey1) {
-      currentChord = chordDM7;
+      currentChord = jazz.chordDM7;
     } else if (event.key === chordKey.chordKey2) {
-      currentChord = chordG7;
+      currentChord = jazz.chordG7;
     } else if (event.key === chordKey.chordKey3) {
-      currentChord = chordCmaj7
+      currentChord = jazz.chordCmaj7
     }
   }
 }
@@ -103,15 +105,15 @@ function keyUp(event) {
 
   // return to chordOpen on release
   if (event.key === chordKey.chordKey1) {
-    if (currentChord === chordDM7){
+    if (currentChord === jazz.chordDM7){
       currentChord = chordOpen;
     }
   } else if (event.key === chordKey.chordKey2) {
-    if (currentChord === chordG7){
+    if (currentChord === jazz.chordG7){
       currentChord = chordOpen;
     }
   } else if (event.key === chordKey.chordKey3) {
-    if (currentChord === chordCmaj7){
+    if (currentChord === jazz.chordCmaj7){
       currentChord = chordOpen;
     }
 
