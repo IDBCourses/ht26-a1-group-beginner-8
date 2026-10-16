@@ -91,7 +91,7 @@ function keyDown(event) {
       currentChord = chordDM7;
     } else if (event.key === chordKey.chordKey2) {
       currentChord = chordG7;
-    } if (event.key === chordKey.chordKey3) {
+    } else if (event.key === chordKey.chordKey3) {
       currentChord = chordCmaj7
     }
   }
@@ -111,8 +111,10 @@ function keyUp(event) {
       currentChord = chordOpen;
     }
   } else if (event.key === chordKey.chordKey3) {
-    if (currentChord === chordCmaj7)
+    if (currentChord === chordCmaj7){
       currentChord = chordOpen;
+    }
+
   }
 }
 
