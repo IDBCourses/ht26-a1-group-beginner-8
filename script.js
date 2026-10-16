@@ -19,29 +19,28 @@
  */
 
 // ---------- Settings ----------
-// Settings variables should contain all of the "fixed" parts of your programs
-// For example: which key does what, which notes you can play, the tempo.
-
-const stringKey1 = "x";// the key that plays the example note
-const stringKey2 = "c";
-const stringKey3 = "v";
-const stringKey4 = "b";
-const stringKey5 = "n";
-const stringKey6 = "m";
-
-const chordKey1 = "a";
-const chordKey2 = "s";
-const chordKey3 = "d";
+// This cluster of code serves as the object for the strings. This was done to organise the stringKeys. -- Miguel
+const stringKey = {
+  stringKey1: "x",
+  stringKey2: "c",
+  stringKey3: "v",
+  stringKey4: "b",
+  stringKey5: "n",
+  stringKey6: "m"
+}
+// This cluster of code serves as the object for the chordKeys. --Miguel
+const chordKey = {
+  chordKey1: "a",
+  chordKey2: "s",
+  chordKey3: "d"
+}
 
 const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"];
 const chordG7 = ["G2", "B3", "D3", "G3", "B3", "F4"];
 const chordDM7 = ["A2", "C3", "D3", "A3", "C4", "F4"];
 const chordCmaj7 = ["B2", "C3", "E3", "G3", "B3", "E4"];
 
-
 // ---------- State ----------
-// State variables are the parts of your program that change over time.
-// For example: which octave you're playing in, or whether a drone is on.
 let currentChord = chordOpen;
 
 // ---------- Sound ----------
@@ -67,32 +66,32 @@ function use() {
 // Runs every time a key goes down.
 function keyDown(event) {
   Tone.start(); // browsers only allow sound after the player has pressed something
-
-  // Holding a key down sends keydown again and again. Only react to the first one.
+  // Holding a key down sends keydown again and again. Only react to the first key press.
   if (event.repeat === false) {
     console.log("Key down:", event.key);
 
     // Handle stringKeys to play notes in current chord
-    if (event.key === stringKey1) {
+    console.log(stringKey.stringKey1)
+    if (event.key === stringKey.stringKey1) {
       plucky.triggerAttack(currentChord[0], Tone.now());
-    } else if (event.key === stringKey2) {
+    } else if (event.key === stringKey.stringKey2) {
       plucky.triggerAttack(currentChord[1], Tone.now());
-    } else if (event.key === stringKey3) {
+    } else if (event.key === stringKey.stringKey3) {
       plucky.triggerAttack(currentChord[2], Tone.now());
-    } else if (event.key === stringKey4) {
+    } else if (event.key === stringKey.stringKey4) {
       plucky.triggerAttack(currentChord[3], Tone.now());
-    } else if (event.key === stringKey5) {
+    } else if (event.key === stringKey.stringKey5) {
       plucky.triggerAttack(currentChord[4], Tone.now());
-    } else if (event.key === stringKey6) {
+    } else if (event.key === stringKey.stringKey6) {
       plucky.triggerAttack(currentChord[5], Tone.now());
     }
 
     // Handle chord keys to set current chord
-    if (event.key === chordKey1) {
+    if (event.key === chordKey.chordKey1) {
       currentChord = chordDM7;
-    } else if (event.key === chordKey2) {
+    } else if (event.key === chordKey.chordKey2) {
       currentChord = chordG7;
-    } if (event.key === chordKey3) {
+    } else if (event.key === chordKey.chordKey3) {
       currentChord = chordCmaj7
     }
   }
@@ -103,27 +102,26 @@ function keyUp(event) {
   console.log("Key up:", event.key);
 
   // return to chordOpen on release
-  if (event.key === chordKey1) {
+  if (event.key === chordKey.chordKey1) {
     if (currentChord === chordDM7){
       currentChord = chordOpen;
     }
-  } else if (event.key === chordKey2) {
+  } else if (event.key === chordKey.chordKey2) {
     if (currentChord === chordG7){
       currentChord = chordOpen;
     }
-  } else if (event.key === chordKey3) {
-    if (currentChord === chordCmaj7)
+  } else if (event.key === chordKey.chordKey3) {
+    if (currentChord === chordCmaj7){
       currentChord = chordOpen;
+    }
+
   }
 }
 
 // ---------- Setup ----------
 // Setup is run once, at the start of the program. It sets everything up for us!
 function setup() {
-  update(); // start the update loop
-  use(); // start the use loop
-
-  // Put your event listener code here
+  // Event listener codes under setup()
   window.addEventListener("keydown", keyDown);
   window.addEventListener("keyup", keyUp);
 }
