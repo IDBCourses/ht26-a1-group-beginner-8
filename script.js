@@ -19,30 +19,34 @@
  */
 
 // ---------- Settings ----------
-// Settings variables should contain all of the "fixed" parts of your programs
-// For example: which key does what, which notes you can play, the tempo.
-const strum = ["E2", "A2", "D3", "G3", "B3", "E4"];
-const strumKey = ["x", "c", "v", "b", "n", "m"]; // the key that plays the example note
-const key1 = "d"; // the note it plays
-const key2 = "f";
-const key3 = "g";
-const key4 = "h";
-const key5 = "j";
-const key6 = "k";
-const chord1 = "C";
-const chord2 = "A";
-const chord3 = "G";
-const chord4 = "E";
-const chord5 = "D";
-const chord6 = "B";
+// This cluster of code serves as the object for the strings. This was done to organise the stringKeys. -- Miguel
+const stringKey = {
+  stringKey1: "x",
+  stringKey2: "c",
+  stringKey3: "v",
+  stringKey4: "b",
+  stringKey5: "n",
+  stringKey6: "m"
+}
+// This cluster of code serves as the object for the chordKeys. --Miguel
+const chordKey = {
+  chordKey1: "a",
+  chordKey2: "s",
+  chordKey3: "d"
+}
+
+const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"];
+const chordG7 = ["G2", "B3", "D3", "G3", "B3", "F4"];
+const chordDM7 = ["A2", "C3", "D3", "A3", "C4", "F4"];
+const chordCmaj7 = ["B2", "C3", "E3", "G3", "B3", "E4"];
 
 // ---------- State ----------
-// State variables are the parts of your program that change over time.
-// For example: which octave you're playing in, or whether a drone is on.
+let currentChord = chordOpen;
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const guitar = new Tone.PluckSynth(Tone.PluckSynth).toDestination(); // can play several notes at once
+const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.2 }).toDestination();
+const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
 
 // ---------- Update ----------
 // Update the state. This is called every 100ms.
@@ -62,14 +66,33 @@ function use() {
 // Runs every time a key goes down.
 function keyDown(event) {
   Tone.start(); // browsers only allow sound after the player has pressed something
-
-  // Holding a key down sends keydown again and again. Only react to the first one.
+  // Holding a key down sends keydown again and again. Only react to the first key press.
   if (event.repeat === false) {
     console.log("Key down:", event.key);
 
-    // Example: replace this with your own instrument.
-    if (event.key === exampleKey) {
-      synth.triggerAttack(exampleNote, Tone.now()); // keeps sounding until triggerRelease
+    // Handle stringKeys to play notes in current chord
+    console.log(stringKey.stringKey1)
+    if (event.key === stringKey.stringKey1) {
+      plucky.triggerAttack(currentChord[0], Tone.now());
+    } else if (event.key === stringKey.stringKey2) {
+      plucky.triggerAttack(currentChord[1], Tone.now());
+    } else if (event.key === stringKey.stringKey3) {
+      plucky.triggerAttack(currentChord[2], Tone.now());
+    } else if (event.key === stringKey.stringKey4) {
+      plucky.triggerAttack(currentChord[3], Tone.now());
+    } else if (event.key === stringKey.stringKey5) {
+      plucky.triggerAttack(currentChord[4], Tone.now());
+    } else if (event.key === stringKey.stringKey6) {
+      plucky.triggerAttack(currentChord[5], Tone.now());
+    }
+
+    // Handle chord keys to set current chord
+    if (event.key === chordKey.chordKey1) {
+      currentChord = chordDM7;
+    } else if (event.key === chordKey.chordKey2) {
+      currentChord = chordG7;
+    } if (event.key === chordKey.chordKey3) {
+      currentChord = chordCmaj7
     }
   }
 }
@@ -78,19 +101,25 @@ function keyDown(event) {
 function keyUp(event) {
   console.log("Key up:", event.key);
 
-  // Example: replace this with your own instrument.
-  if (event.key === exampleKey) {
-    synth.triggerRelease(exampleNote, Tone.now());
+  // return to chordOpen on release
+  if (event.key === chordKey.chordKey1) {
+    if (currentChord === chordDM7){
+      currentChord = chordOpen;
+    }
+  } else if (event.key === chordKey.chordKey2) {
+    if (currentChord === chordG7){
+      currentChord = chordOpen;
+    }
+  } else if (event.key === chordKey.chordKey3) {
+    if (currentChord === chordCmaj7)
+      currentChord = chordOpen;
   }
 }
 
 // ---------- Setup ----------
 // Setup is run once, at the start of the program. It sets everything up for us!
 function setup() {
-  update(); // start the update loop
-  use(); // start the use loop
-
-  // Put your event listener code here
+  // Event listener codes under setup()
   window.addEventListener("keydown", keyDown);
   window.addEventListener("keyup", keyUp);
 }
