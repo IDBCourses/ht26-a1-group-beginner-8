@@ -118,8 +118,6 @@ function keyDown(event) {
 
 // Runs every time a key comes up.
 function keyUp(event) {
-  console.log("Key up:", event.key);
-
   // return to chordOpen on release
   if (event.key === chordKey.chordKey1) {
     if (currentChord === currentStyle[0]){
