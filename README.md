@@ -12,27 +12,31 @@ Strumming the keys x, c, v, b, n, and m allow for playing a flat note. If the us
 
 ## How to play
 
-| Key | What it does                                                 |
-| --- | ------------------------------------------------------------ |
-| `X` | The first "string" of the guitar that plays a flat note if plucked by itself.|
-| --- | ------------------------------------------------------------ |
+| Key | What it does                                                                  |
+| --- | ----------------------------------------------------------------------------- |
+| `X` | The first "string" of the guitar that plays a flat note if plucked by itself. |
+| --- | ----------------------------------------------------------------------------- |
 | `C` | The second "string" of the guitar that plays a flat note if plucked by itself.|
-| --- | ------------------------------------------------------------ |
-| `V` | The third "string" of the guitar that plays a flat note if plucked by itself.|
-| --- | ------------------------------------------------------------ |
+| --- | ----------------------------------------------------------------------------- |
+| `V` | The third "string" of the guitar that plays a flat note if plucked by itself. |
+| --- | ----------------------------------------------------------------------------- |
 | `B` | The fourth "string" of the guitar that plays a flat note if plucked by itself.|
-| --- | ------------------------------------------------------------ |
-| `N` | The fifth "string" of the guitar that plays a flat note if plucked by itself.|
-| --- | ------------------------------------------------------------ |
-| `M` | The sixth "string" of the guitar that plays a flat note if plucked by itself.|
-| --- | ------------------------------------------------------------ |
-| `A` | The first chord that's played by the guitar if held down and "strummed" by the first through sixth keys of the guitar.|
-| --- | ------------------------------------------------------------ |
-| `S` | The second chord that's played by the guitar if held down and "strummed" by the first through sixth keys of the guitar.|
-| --- | ------------------------------------------------------------ |
-| `D` | The third chord that's played by the guitar if held down and "strummed" by the first through sixth keys of the guitar.|
-| --- | ------------------------------------------------------------ |
-| `Q` | The "switch" mode of the guitar. This switches the guitar from a "jazz" setting to a "rock" setting.|
+| --- | ----------------------------------------------------------------------------- |
+| `N` | The fifth "string" of the guitar that plays a flat note if plucked by itself. |
+| --- | ----------------------------------------------------------------------------- |
+| `M` | The sixth "string" of the guitar that plays a flat note if plucked by itself. |
+| --- | ----------------------------------------------------------------------------- |
+| `A` | The first chord that's played by the guitar if held down and "strummed" by the|
+|     | first through sixth keys of the guitar                                        |
+| --- | ----------------------------------------------------------------------------- |
+| `S` | The second chord that's played by the guitar if held down and "strummed" by   |
+|     | the firsth through sixth keys of the guitar                                   |
+| --- | ----------------------------------------------------------------------------- |
+| `D` | The third chord that's played by the guitar if held down and "strummed by the |
+|     | first through sixth keys of the guitar                                        |
+| --- | ----------------------------------------------------------------------------- |
+| `Q` | The "switch" mode of the guitar. This switches the guitar from a "jazz"       |
+|     | setting to a "rock" setting.                                                  |
 
 **How to Start**
 To get started, simply click on the browser page and strum away with keys X, C, V, B, N, and M! If you want to change the chord, press and hold keys A, S, or D and strum them to find out! Want to switch to a different settign? This guitar features a "switch" key of Q to switch between Jazz and Rock settings. Happy strumming!
