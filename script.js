@@ -19,7 +19,7 @@
  */
 
 // ---------- Settings ----------
-// This cluster of code serves as the object for the strings. This was done to organise the stringKeys. -- Miguel
+// This cluster of code serves as the object for the strings. This was done to organise the stringKeys. -- AN4762
 const stringKey = {
   stringKey1: "x",
   stringKey2: "c",
@@ -28,7 +28,7 @@ const stringKey = {
   stringKey5: "n",
   stringKey6: "m"
 }
-// This cluster of code serves as the object for the chordKeys. --Miguel
+// This cluster of code serves as the object for the chordKeys. -- AN4762
 const chordKey = {
   chordKey1: "a",
   chordKey2: "s",
@@ -36,7 +36,6 @@ const chordKey = {
 }
 
 const changeStyle = "q"
-
 const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"]; // notes of a guitar string
 
 const jazz = [
