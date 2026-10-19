@@ -35,34 +35,37 @@ const chordKey = {
   chordKey3: "d"
 }
 
-const jazz = {
-  chordG7: ["G2", "B3", "D3", "G3", "B3", "F4"],
-  chordDM7: ["A2", "C3", "D3", "A3", "C4", "F4"],
-  chordCmaj7: ["B2", "C3", "E3", "G3", "B3", "E4"],
-}
+const changeStyle = "q"
 
-const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"];
+const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"]; // notes of a guitar string
+
+const jazz = [
+  ["G2", "B3", "D3", "G3", "B3", "F4"], // Chord G7
+  ["A2", "C3", "D3", "A3", "C4", "F4"], // Chord DM7
+  ["B2", "C3", "E3", "G3", "B3", "E4"], // Chord Cmaj7
+]
+
+const rock = [
+  ["E2", "A2", "E3", "A3", "C#4", "E4"], // A major Chord
+  ["F#2", "A2", "D3", "A3", "D4", "F#4"], // D major Chord
+  ["E2", "B2", "E3", "G#3", "B3", "E4"], // E major Chord
+]
+
 // ---------- State ----------
 let currentChord = chordOpen;
+let currentStyle = jazz; // allows for style to be changed
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
 const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.5 }).toDestination();
 const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
 
-// ---------- Update ----------
-// Update the state. This is called every 100ms.
-function update() {
-  // Example: replace this with your own instrument.
+const reverb2 = new Tone.Reverb({ decay: 0.5, wet: 0.2 }).toDestination();
+const distortion = new Tone.Distortion({ distortion: 0.6, oversample: "4x" }).connect(reverb2);
+const plucky2 = new Tone.PluckSynth({ attackNoise: 1, dampening: 4000, resonance: 0.95 }).connect(distortion);
 
-  setTimeout(update, 100); // call update() again in 100 milliseconds
-}
+let currentTone = plucky; // allows for tone to be changed
 
-// ---------- Use ----------
-// Use the state to make sound. This is called every 100ms.
-function use() {
-  setTimeout(use, 100); // call use() again in 100 milliseconds
-}
 
 // ---------- Controls (Event Handlers) ----------
 // Runs every time a key goes down.
@@ -75,45 +78,56 @@ function keyDown(event) {
     // Handle stringKeys to play notes in current chord
     console.log(stringKey.stringKey1)
     if (event.key === stringKey.stringKey1) {
-      plucky.triggerAttack(currentChord[0], Tone.now());
+      currentTone.triggerAttack(currentChord[0], Tone.now());
     } else if (event.key === stringKey.stringKey2) {
-      plucky.triggerAttack(currentChord[1], Tone.now());
+      currentTone.triggerAttack(currentChord[1], Tone.now());
     } else if (event.key === stringKey.stringKey3) {
-      plucky.triggerAttack(currentChord[2], Tone.now());
+      currentTone.triggerAttack(currentChord[2], Tone.now());
     } else if (event.key === stringKey.stringKey4) {
-      plucky.triggerAttack(currentChord[3], Tone.now());
+      currentTone.triggerAttack(currentChord[3], Tone.now());
     } else if (event.key === stringKey.stringKey5) {
-      plucky.triggerAttack(currentChord[4], Tone.now());
+      currentTone.triggerAttack(currentChord[4], Tone.now());
     } else if (event.key === stringKey.stringKey6) {
-      plucky.triggerAttack(currentChord[5], Tone.now());
+      currentTone.triggerAttack(currentChord[5], Tone.now());
     }
 
     // Handle chord keys to set current chord
     if (event.key === chordKey.chordKey1) {
-      currentChord = jazz.chordDM7;
+      currentChord = currentStyle[0];
     } else if (event.key === chordKey.chordKey2) {
-      currentChord = jazz.chordG7;
+      currentChord = currentStyle[1];
     } else if (event.key === chordKey.chordKey3) {
-      currentChord = jazz.chordCmaj7
+      currentChord = currentStyle[2];
     }
+
+    // Handles stylechange
+    if (event.key === changeStyle) {
+      if (currentStyle === jazz) {
+      currentStyle = rock;
+      currentTone = plucky2;
+      console.log("Style changed to rock");
+  }   else {
+      currentStyle = jazz;
+      currentTone = plucky;
+      console.log("Style changed to jazz");
   }
+  }
+}
 }
 
 // Runs every time a key comes up.
 function keyUp(event) {
-  console.log("Key up:", event.key);
-
   // return to chordOpen on release
   if (event.key === chordKey.chordKey1) {
-    if (currentChord === jazz.chordDM7){
+    if (currentChord === currentStyle[0]){
       currentChord = chordOpen;
     }
   } else if (event.key === chordKey.chordKey2) {
-    if (currentChord === jazz.chordG7){
+    if (currentChord === currentStyle[1]){
       currentChord = chordOpen;
     }
   } else if (event.key === chordKey.chordKey3) {
-    if (currentChord === jazz.chordCmaj7){
+    if (currentChord === currentStyle[2]){
       currentChord = chordOpen;
     }
 
