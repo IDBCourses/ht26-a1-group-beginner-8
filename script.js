@@ -35,40 +35,42 @@ const chordKey = {
   chordKey3: "d"
 }
 
-const changeStyle = "q"
+const changeStyle = "q" // the key to change between styles - Victor (an5168)
 
-const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"]; // notes of a guitar string
+const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"]; // notes of a guitar string Samantha (as5138)
 
 const jazz = [
-  ["G2", "B3", "D3", "G3", "B3", "F4"], // Chord G7
-  ["A2", "C3", "D3", "A3", "C4", "F4"], // Chord DM7
-  ["B2", "C3", "E3", "G3", "B3", "E4"], // Chord Cmaj7
-]
+  ["D3", "F3", "A3", "C4", "D4", "F4"], // Chord D minor 7
+  ["G2", "D3", "F3", "B3", "D4", "G4"], // Chord G7
+  ["C3", "E3", "G3", "B3", "C4", "E4"], // Chord Cmaj7
+] // Jazz progression
 
 const rock = [
   ["E2", "A2", "E3", "A3", "C#4", "E4"], // A major Chord
   ["F#2", "A2", "D3", "A3", "D4", "F#4"], // D major Chord
   ["E2", "B2", "E3", "G#3", "B3", "E4"], // E major Chord
-]
+] // Rock progression
 
 // ---------- State ----------
-let currentChord = chordOpen;
-let currentStyle = jazz; // allows for style to be changed
+let currentChord = chordOpen; // sets current cord to chord open Samantha (as5138)
+let currentStyle = jazz; // sets current style to jazz Samantha (as5138)
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.5 }).toDestination();
-const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
+const reverb = new Tone.Reverb({ decay: 2.5, wet: 0.35 }).toDestination();
+const filter = new Tone.Filter({ frequency: 1400, type: "lowpass", rolloff: -12}).connect(reverb);
+const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(filter);
 
-const reverb2 = new Tone.Reverb({ decay: 0.5, wet: 0.2 }).toDestination();
-const distortion = new Tone.Distortion({ distortion: 0.6, oversample: "4x" }).connect(reverb2);
-const plucky2 = new Tone.PluckSynth({ attackNoise: 1, dampening: 4000, resonance: 0.95 }).connect(distortion);
+const reverb2 = new Tone.Reverb({ decay: 1.2, wet: 0.15 }).toDestination();
+const filter2 = new Tone.Filter({ frequency: 4000, type: "lowpass"}).connect(reverb2);
+const distortion = new Tone.Distortion({ distortion: 0.7, wet: 0.5, oversample: "4x" }).connect(filter2);
+const plucky2 = new Tone.PluckSynth({ attackNoise: 2, dampening: 3500, resonance: 0.96 }).connect(distortion);
 
-let currentTone = plucky; // allows for tone to be changed
+let currentTone = plucky; // allows for tone to be changed Samantha (as5138)
 
 
 // ---------- Controls (Event Handlers) ----------
-// Runs every time a key goes down.
+
 function ChordChange (keyPressed) {
   // Handle chord keys to set current chord - Samantha(as5138)
     if (keyPressed === chordKey.chordKey1) {
