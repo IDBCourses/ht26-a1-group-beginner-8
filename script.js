@@ -79,6 +79,20 @@ function ChordChange (keyPressed) {
       currentChord = currentStyle[2];
     }
 }
+ // Handles stylechange by pressing "q" - Victor (an5168)
+ function switchStyle(newStyle) {
+    if (newStyle === changeStyle) {
+      if (currentStyle === jazz) {
+      currentStyle = rock;
+      currentTone = plucky2;
+      console.log("Style changed to rock");
+  }   else {
+      currentStyle = jazz;
+      currentTone = plucky;
+      console.log("Style changed to jazz");
+  }
+}
+}
 
 function keyDown(event){
   Tone.start(); // browsers only allow sound after the player has pressed something
@@ -104,18 +118,9 @@ function keyDown(event){
 
     ChordChange(event.key) // calls chord change function Samantha(as5138)
 
-    // Handles stylechange
-    if (event.key === changeStyle) {
-      if (currentStyle === jazz) {
-      currentStyle = rock;
-      currentTone = plucky2;
-      console.log("Style changed to rock");
-  }   else {
-      currentStyle = jazz;
-      currentTone = plucky;
-      console.log("Style changed to jazz");
-  }
-  }
+    switchStyle(event.key) // calls function switchStyle to change between jazz and rock - Victor (an5168)
+
+   
 }
 }
 
