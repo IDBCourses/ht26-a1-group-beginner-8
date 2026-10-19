@@ -51,8 +51,6 @@ const rock = [
   ["E2", "B2", "E3", "G#3", "B3", "E4"], // E major Chord
 ]
 
-
-
 // ---------- State ----------
 let currentChord = chordOpen;
 let currentStyle = jazz; // allows for style to be changed
