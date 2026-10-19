@@ -69,7 +69,18 @@ let currentTone = plucky; // allows for tone to be changed
 
 // ---------- Controls (Event Handlers) ----------
 // Runs every time a key goes down.
-function keyDown(event) {
+function ChordChange (keyPressed) {
+  // Handle chord keys to set current chord - Samantha(as5138)
+    if (keyPressed === chordKey.chordKey1) {
+      currentChord = currentStyle[0];
+    } else if (keyPressed === chordKey.chordKey2) {
+      currentChord = currentStyle[1];
+    } else if (keyPressed === chordKey.chordKey3) {
+      currentChord = currentStyle[2];
+    }
+}
+
+function keyDown(event){
   Tone.start(); // browsers only allow sound after the player has pressed something
   // Holding a key down sends keydown again and again. Only react to the first key press.
   if (event.repeat === false) {
@@ -91,14 +102,7 @@ function keyDown(event) {
       currentTone.triggerAttack(currentChord[5], Tone.now());
     }
 
-    // Handle chord keys to set current chord
-    if (event.key === chordKey.chordKey1) {
-      currentChord = currentStyle[0];
-    } else if (event.key === chordKey.chordKey2) {
-      currentChord = currentStyle[1];
-    } else if (event.key === chordKey.chordKey3) {
-      currentChord = currentStyle[2];
-    }
+    ChordChange(event.key) // calls chord change function Samantha(as5138)
 
     // Handles stylechange
     if (event.key === changeStyle) {
@@ -117,7 +121,7 @@ function keyDown(event) {
 
 // Runs every time a key comes up.
 function keyUp(event) {
-  // return to chordOpen on release
+  // return to chordOpen on release - Samantha(as5318)
   if (event.key === chordKey.chordKey1) {
     if (currentChord === currentStyle[0]){
       currentChord = chordOpen;
