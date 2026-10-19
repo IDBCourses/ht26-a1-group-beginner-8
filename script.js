@@ -35,6 +35,8 @@ const chordKey = {
   chordKey3: "d"
 }
 
+const changeStyle = "q"
+
 const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"]; // notes of a guitar string
 
 const jazz = [
@@ -43,6 +45,11 @@ const jazz = [
   ["B2", "C3", "E3", "G3", "B3", "E4"], // Chord Cmaj7
 ]
 
+const rock = [
+  ["E2", "A2", "E3", "A3", "C#4", "E4"], // A major Chord
+  ["F#2", "A2", "D3", "A3", "D4", "F#4"], // D major Chord
+  ["E2", "B2", "E3", "G#3", "B3", "E4"], // E major Chord
+]
 
 // ---------- State ----------
 let currentChord = chordOpen;
@@ -52,6 +59,10 @@ let currentStyle = jazz; // allows for style to be changed
 // Make the instruments and plug them into the speakers.
 const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.5 }).toDestination();
 const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
+
+const reverb2 = new Tone.Reverb({ decay: 0.5, wet: 0.2 }).toDestination();
+const distortion = new Tone.Distortion({ distortion: 0.6, oversample: "4x" }).connect(reverb2);
+const plucky2 = new Tone.PluckSynth({ attackNoise: 1, dampening: 4000, resonance: 0.95 }).connect(distortion);
 
 let currentTone = plucky; // allows for tone to be changed
 
@@ -88,13 +99,24 @@ function keyDown(event) {
     } else if (event.key === chordKey.chordKey3) {
       currentChord = currentStyle[2];
     }
+
+    // Handles stylechange
+    if (event.key === changeStyle) {
+      if (currentStyle === jazz) {
+      currentStyle = rock;
+      currentTone = plucky2;
+      console.log("Style changed to rock");
+  }   else {
+      currentStyle = jazz;
+      currentTone = plucky;
+      console.log("Style changed to jazz");
   }
+  }
+}
 }
 
 // Runs every time a key comes up.
 function keyUp(event) {
-  console.log("Key up:", event.key);
-
   // return to chordOpen on release
   if (event.key === chordKey.chordKey1) {
     if (currentChord === currentStyle[0]){
