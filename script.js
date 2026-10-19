@@ -19,7 +19,7 @@
  */
 
 // ---------- Settings ----------
-// This cluster of code serves as the object for the strings. This was done to organise the stringKeys. -- Miguel
+// This cluster of code serves as the object for the strings. This was done to organise the stringKeys. -- Miguel (AN4762)
 const stringKey = {
   stringKey1: "x",
   stringKey2: "c",
@@ -28,7 +28,7 @@ const stringKey = {
   stringKey5: "n",
   stringKey6: "m"
 }
-// This cluster of code serves as the object for the chordKeys. --Miguel
+// This cluster of code serves as the object for the chordKeys. -- Miguel (AN4762)
 const chordKey = {
   chordKey1: "a",
   chordKey2: "s",
@@ -95,12 +95,12 @@ function ChordChange (keyPressed) {
 }
 
 function keyDown(event){
-  Tone.start(); // browsers only allow sound after the player has pressed something
-  // Holding a key down sends keydown again and again. Only react to the first key press.
+  Tone.start(); // browsers only allow sound after the player has pressed something -- Miguel (AN4762)
+  // Holding a key down sends keydown again and again. Only react to the first key press. -- Miguel (AN4762)
   if (event.repeat === false) {
     console.log("Key down:", event.key);
 
-    // Handle stringKeys to play notes in current chord
+    // Handle stringKeys to play notes in current chord -- Miguel (AN4762)
     console.log(stringKey.stringKey1)
     if (event.key === stringKey.stringKey1) {
       currentTone.triggerAttack(currentChord[0], Tone.now());
@@ -120,7 +120,7 @@ function keyDown(event){
 
     switchStyle(event.key) // calls function switchStyle to change between jazz and rock - Victor (an5168)
 
-   
+
 }
 }
 
