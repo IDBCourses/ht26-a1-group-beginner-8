@@ -100,6 +100,7 @@ function keyDown(event) {
       currentChord = currentStyle[2];
     }
 
+    // Handles stylechange
     if (event.key === changeStyle) {
       if (currentStyle === jazz) {
       currentStyle = rock;
