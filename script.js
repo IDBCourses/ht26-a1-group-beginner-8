@@ -35,6 +35,8 @@ const chordKey = {
   chordKey3: "d"
 }
 
+const changeStyle = "q"
+
 const chordOpen = ["E2", "A2", "D3", "G3", "B3", "E4"]; // notes of a guitar string
 
 const jazz = [
@@ -42,6 +44,13 @@ const jazz = [
   ["A2", "C3", "D3", "A3", "C4", "F4"], // Chord DM7
   ["B2", "C3", "E3", "G3", "B3", "E4"], // Chord Cmaj7
 ]
+
+const rock = [
+  ["E2", "A2", "E3", "A3", "C#4", "E4"], // A major Chord
+  ["F#2", "A2", "D3", "A3", "D4", "F#4"], // D major Chord
+  ["E2", "B2", "E3", "G#3", "B3", "E4"], // E major Chord
+]
+
 
 
 // ---------- State ----------
@@ -52,6 +61,8 @@ let currentStyle = jazz; // allows for style to be changed
 // Make the instruments and plug them into the speakers.
 const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.5 }).toDestination();
 const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
+
+
 
 let currentTone = plucky; // allows for tone to be changed
 
