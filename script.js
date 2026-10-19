@@ -62,7 +62,9 @@ let currentStyle = jazz; // allows for style to be changed
 const reverb = new Tone.Reverb({ decay: 1.8, wet: 0.5 }).toDestination();
 const plucky = new Tone.PluckSynth({ attackNoise: 1.5, dampening: 3500, resonance: 0.97 }).connect(reverb);
 
-
+const reverb2 = new Tone.Reverb({ decay: 0.5, wet: 0.2 }).toDestination();
+const distortion = new Tone.Distortion({ distortion: 0.6, oversample: "4x" }).connect(reverb2);
+const plucky2 = new Tone.PluckSynth({ attackNoise: 1, dampening: 4000, resonance: 0.95 }).connect(distortion);
 
 let currentTone = plucky; // allows for tone to be changed
 
@@ -99,7 +101,19 @@ function keyDown(event) {
     } else if (event.key === chordKey.chordKey3) {
       currentChord = currentStyle[2];
     }
+
+    if (event.key === changeStyle) {
+      if (currentStyle === jazz) {
+      currentStyle = rock;
+      currentTone = plucky2;
+      console.log("Style changed to rock");
+  }   else {
+      currentStyle = jazz;
+      currentTone = plucky;
+      console.log("Style changed to jazz");
   }
+  }
+}
 }
 
 // Runs every time a key comes up.
