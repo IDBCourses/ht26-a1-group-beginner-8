@@ -100,22 +100,27 @@ function keyDown(event){
   Tone.start(); // browsers only allow sound after the player has pressed something -- Miguel (AN4762)
   // Holding a key down sends keydown again and again. Only react to the first key press. -- Miguel (AN4762)
   if (event.repeat === false) {
-    console.log("Key down:", event.key);
+
 
     // Handle stringKeys to play notes in current chord -- Miguel (AN4762)
-    console.log(stringKey.stringKey1)
     if (event.key === stringKey.stringKey1) {
       currentTone.triggerAttack(currentChord[0], Tone.now());
+      console.log("Playing note ", currentChord[0])
     } else if (event.key === stringKey.stringKey2) {
       currentTone.triggerAttack(currentChord[1], Tone.now());
+      console.log("Playing note ", currentChord[1])
     } else if (event.key === stringKey.stringKey3) {
       currentTone.triggerAttack(currentChord[2], Tone.now());
+      console.log("Playing note ", currentChord[2])
     } else if (event.key === stringKey.stringKey4) {
       currentTone.triggerAttack(currentChord[3], Tone.now());
+      console.log("Playing note ", currentChord[3])
     } else if (event.key === stringKey.stringKey5) {
       currentTone.triggerAttack(currentChord[4], Tone.now());
+      console.log("Playing note ", currentChord[4])
     } else if (event.key === stringKey.stringKey6) {
       currentTone.triggerAttack(currentChord[5], Tone.now());
+      console.log("Playing note ", currentChord[5])
     }
 
     ChordChange(event.key) // calls chord change function Samantha(as5138)
